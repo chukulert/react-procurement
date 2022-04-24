@@ -132,7 +132,6 @@ const OrganisationList = (props) => {
     );
     return filteredArr;
   };
-  console.log(isLoading)
   return (
     <>
       {!isLoading && !error && (
