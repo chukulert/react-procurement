@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button'
 import { InputGroup } from "react-bootstrap";
 
 const PaginationBar = (props) => {
-  const { currentPage, maxPages, changePage, changePageSize, goToPage } = props;
+  const { currentPage, maxPages, changePage, changePageSize, goToPage, pageSize } = props;
   const [validated, setValidated] = useState(true);
   const pageInputRef = useRef();
 
@@ -57,8 +57,8 @@ const PaginationBar = (props) => {
 
       <Form.Group onChange={changePageSize} className="d-flex">
         <Form.Label className='w-100'>Page Results </Form.Label>
-        <Form.Select aria-label="Results per page" size="sm" className='h-75'>
-          <option value="10">10</option>
+        <Form.Select aria-label="Results per page" size="sm" className='h-75' defaultValue={`${pageSize}`}>
+          <option value='10'>10</option>
           <option value="20">20</option>
           <option value="50">50</option>
           <option value="100">100</option>

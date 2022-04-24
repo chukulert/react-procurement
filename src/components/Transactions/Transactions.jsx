@@ -22,9 +22,9 @@ const Transactions = () => {
       try {
         setIsLoading(true);
         const response = await fetch(
-          `https://morning-hollows-07984.herokuapp.com/api/gov-procurement/procurements?page=${currentPage}&pageSize=${pageSize}`
+          // `https://morning-hollows-07984.herokuapp.com/api/gov-procurement/procurements?page=${currentPage}&pageSize=${pageSize}`
           // url below is used for development
-          // `https://tranquil-stream-73766.herokuapp.com/https://morning-hollows-07984.herokuapp.com/api/gov-procurement/procurements?page=${currentPage}&pageSize=${pageSize}`
+          `https://tranquil-stream-73766.herokuapp.com/https://morning-hollows-07984.herokuapp.com/api/gov-procurement/procurements?page=${currentPage}&pageSize=${pageSize}`
         );
 
         const transactionsData = await response.json();
@@ -73,7 +73,7 @@ const Transactions = () => {
 
   const changePageSize = (event) => {
     setPageSize(+event.target.value);
-    setCurrentPage(1)
+    setCurrentPage(1);
   };
 
   //handle contract amount filter functions
@@ -145,13 +145,13 @@ const Transactions = () => {
 
   return (
     <>
+      <TransactionQuery
+        handleContractAmountFilter={handleContractAmountFilter}
+        handleYearFilter={handleYearFilter}
+        handleAgencyFilter={handleAgencyFilter}
+      />
       {!isLoading && !error && (
         <div>
-          <TransactionQuery
-            handleContractAmountFilter={handleContractAmountFilter}
-            handleYearFilter={handleYearFilter}
-            handleAgencyFilter={handleAgencyFilter}
-          />
           <span>Results: {displayedTransactions.length}</span>
           <TransactionTable transactions={displayedTransactions} />
           <PaginationBar
@@ -164,6 +164,7 @@ const Transactions = () => {
           />
         </div>
       )}
+
       {isLoading && !error && <h3>Loading...</h3>}
       {error && (
         <div className="alert alert-danger">{`Something went wrong. Error: ${error.message}`}</div>
