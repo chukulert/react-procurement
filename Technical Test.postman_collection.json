@@ -1,0 +1,88 @@
+{
+	"info": {
+		"_postman_id": "8c9e16c5-cfe4-4e0f-9d86-a4807b62b03f",
+		"name": "Technical Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Procurement",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://morning-hollows-07984.herokuapp.com/api/gov-procurement/procurements?page=2000&pageSize=10",
+					"protocol": "https",
+					"host": [
+						"morning-hollows-07984",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"gov-procurement",
+						"procurements"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "2000"
+						},
+						{
+							"key": "pageSize",
+							"value": "10"
+						}
+					]
+				},
+				"description": "Testing\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Suppliers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://morning-hollows-07984.herokuapp.com/api/gov-procurement/suppliers",
+					"protocol": "https",
+					"host": [
+						"morning-hollows-07984",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"gov-procurement",
+						"suppliers"
+					]
+				},
+				"description": "Testing\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Get Agencies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://morning-hollows-07984.herokuapp.com/api/gov-procurement/agencies",
+					"protocol": "https",
+					"host": [
+						"morning-hollows-07984",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"gov-procurement",
+						"agencies"
+					]
+				},
+				"description": "Testing\r\n"
+			},
+			"response": []
+		}
+	]
+}

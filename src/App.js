@@ -1,24 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import Transactions from "./components/Transactions/Transactions";
+import OrganisationList from "./components/OrganisationList/OrganisationList";
+import NavBar from "./components/NavBar/NavBar";
+import { Container } from "react-bootstrap";
+import OrganisationsContextProvider from "./store/OrganisationsContext";
+import { useState } from "react";
 
 function App() {
+  const [currentTab, setCurrentTab] = useState("procurement");
+
+  const handleNavClick = (eventKey) => {
+    setCurrentTab(eventKey);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <OrganisationsContextProvider>
+      <header className="App-header"> </header>
+      <NavBar handleNavClick={handleNavClick} currentTab={currentTab} />
+      <Container>
+        {currentTab === "procurement" && <Transactions />}
+        {currentTab === "supplier" && (
+          <OrganisationList
+            // url="https://tranquil-stream-73766.herokuapp.com/https://morning-hollows-07984.herokuapp.com/api/gov-procurement/suppliers"
+            url="https://morning-hollows-07984.herokuapp.com/api/gov-procurement/suppliers"
+            orgType="supplier"
+          />
+        )}
+        {currentTab === "agency" && (
+          <OrganisationList
+            // url="https://tranquil-stream-73766.herokuapp.com/https://morning-hollows-07984.herokuapp.com/api/gov-procurement/agencies"
+            url="https://morning-hollows-07984.herokuapp.com/api/gov-procurement/agencies"
+            orgType="agency"
+          />
+        )}
+      </Container>
+    </OrganisationsContextProvider>
   );
 }
 
