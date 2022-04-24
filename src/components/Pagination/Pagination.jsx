@@ -18,8 +18,8 @@ const PaginationBar = (props) => {
       return;
     }
     goToPage(pageInput);
-    pageInputRef.current.value = "";
     setValidated(true);
+    pageInputRef.current.value = "";
   };
 
   const atStart = [1, 2].includes(currentPage);
@@ -53,11 +53,11 @@ const PaginationBar = (props) => {
   ));
 
   return (
-    <div className="d-flex flex-row justify-content-between mb-3">
+    <div className="d-flex flex-row justify-content-between mb-3 align-items-top">
 
-      <Form.Group onChange={changePageSize} className="d-flex mh-50 ">
-        <Form.Label>Results per page </Form.Label>
-        <Form.Select aria-label="Results per page" size="sm">
+      <Form.Group onChange={changePageSize} className="d-flex">
+        <Form.Label className='w-100'>Page Results </Form.Label>
+        <Form.Select aria-label="Results per page" size="sm" className='h-75'>
           <option value="10">10</option>
           <option value="20">20</option>
           <option value="50">50</option>
@@ -70,7 +70,7 @@ const PaginationBar = (props) => {
           <InputGroup hasValidation>
             <Form.Control
               type="number"
-              placeholder="Go to page"
+              placeholder="Enter page number"
               ref={pageInputRef}
               isInvalid={!validated}
             />
@@ -79,7 +79,7 @@ const PaginationBar = (props) => {
             </Form.Control.Feedback>
           </InputGroup>
         </Form.Group>
-        <Button type="submit" className="mh-50">
+        <Button type="submit" className='h-75'>
           Go
         </Button>
       </Form>

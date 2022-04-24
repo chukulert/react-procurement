@@ -7,6 +7,8 @@ const TransactionQuery = (props) => {
     <div className='border p-3 mt-3 mb-3'>
       <h5>Transaction filters</h5>
       <div className="d-flex justify-content-between ">
+
+          {/* {Year filter} */}
         <Form.Group
           controlId="exampleForm.ControlInput1"
           onChange={handleYearFilter}
@@ -15,6 +17,7 @@ const TransactionQuery = (props) => {
           <Form.Control type="text" placeholder="Enter year" />
         </Form.Group>
 
+         {/* {Agency filter} */}
         <Form.Group
           controlId="exampleForm.ControlInput1"
           onChange={handleAgencyFilter}
@@ -23,7 +26,7 @@ const TransactionQuery = (props) => {
           <Form.Control type="text" placeholder="Enter Agency name" />
         </Form.Group>
 
-        {/* {AmountSelection} */}
+        {/* {Amount selection} */}
         <Form.Group onChange={handleContractAmountFilter} className="w-25">
           <Form.Label className='w-100 text-center'>Amount</Form.Label>
           <Form.Select aria-label="Contract Amount">

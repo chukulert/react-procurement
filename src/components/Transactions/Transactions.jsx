@@ -15,31 +15,37 @@ const Transactions = () => {
   const [maxPages, setMaxPages] = useState(null);
 
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchTransactions = async () => {
       setIsLoading(true);
-      const response = await fetch(
-        `https://morning-hollows-07984.herokuapp.com/api/gov-procurement/procurements?page=${currentPage}&pageSize=${pageSize}`
-        // `https://tranquil-stream-73766.herokuapp.com/https://morning-hollows-07984.herokuapp.com/api/gov-procurement/procurements?page=${currentPage}&pageSize=${pageSize}`
-      );
-      if (!response.ok) {
-        throw new Error("Something went wrong");
+      try {
+        const response = await fetch(
+          `https://morning-hollows-07984.herokuapp.com/api/gov-procurement/procurements?page=${currentPage}&pageSize=${pageSize}`
+          // url below is used for development
+          // `https://tranquil-stream-73766.herokuapp.com/https://morning-hollows-07984.herokuapp.com/api/gov-procurement/procurements?page=${currentPage}&pageSize=${pageSize}`
+        );
+
+        const transactionsData = await response.json();
+        setTransactions(transactionsData.data);
+        setDisplayedTransactions(transactionsData.data);
+        setCurrentPage(transactionsData.page);
+        setMaxPages(transactionsData.totalPages);
+      } catch (error) {
+        setError(error);
       }
-      const transactionsData = await response.json();
-      setTransactions(transactionsData.data);
-      setDisplayedTransactions(transactionsData.data);
-      setCurrentPage(transactionsData.page);
-      setMaxPages(transactionsData.totalPages);
     };
     fetchTransactions();
     setIsLoading(false);
+    setError(null);
   }, [currentPage, pageSize]);
 
   const applyFilters = useCallback(
     (arr) => {
       let filteredArray = arr;
-      if (contractAmt) filteredArray = filterContractAmount(filteredArray, contractAmt);
+      if (contractAmt)
+        filteredArray = filterContractAmount(filteredArray, contractAmt);
       if (year) filteredArray = filterYear(filteredArray, year);
       if (agency) filteredArray = filterAgency(filteredArray, agency);
       return filteredArray;
@@ -62,8 +68,8 @@ const Transactions = () => {
   };
 
   const goToPage = (pageNum) => {
-    setCurrentPage(pageNum)
-  }
+    setCurrentPage(pageNum);
+  };
 
   const changePageSize = (event) => {
     setPageSize(+event.target.value);
@@ -138,7 +144,7 @@ const Transactions = () => {
 
   return (
     <>
-      {!isLoading && (
+      {!isLoading && !error && (
         <div>
           <TransactionQuery
             handleContractAmountFilter={handleContractAmountFilter}
@@ -157,7 +163,10 @@ const Transactions = () => {
           />
         </div>
       )}
-      {isLoading && <div>Loading...</div>}
+      {isLoading && !error && <h3>Loading...</h3>}
+      {error && (
+        <div className="alert alert-danger">{`Something went wrong. Error: ${error.message}`}</div>
+      )}
     </>
   );
 };
