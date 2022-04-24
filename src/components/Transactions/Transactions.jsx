@@ -22,9 +22,9 @@ const Transactions = () => {
       try {
         setIsLoading(true);
         const response = await fetch(
-          // `https://morning-hollows-07984.herokuapp.com/api/gov-procurement/procurements?page=${currentPage}&pageSize=${pageSize}`
+          `https://morning-hollows-07984.herokuapp.com/api/gov-procurement/procurements?page=${currentPage}&pageSize=${pageSize}`
           // url below is used for development
-          `https://tranquil-stream-73766.herokuapp.com/https://morning-hollows-07984.herokuapp.com/api/gov-procurement/procurements?page=${currentPage}&pageSize=${pageSize}`
+          // `https://tranquil-stream-73766.herokuapp.com/https://morning-hollows-07984.herokuapp.com/api/gov-procurement/procurements?page=${currentPage}&pageSize=${pageSize}`
         );
 
         const transactionsData = await response.json();
