@@ -25,11 +25,12 @@ const OrganisationList = (props) => {
 
   useEffect(() => {
     const fetchOrganisationList = async () => {
-      setIsLoading(true);
       try {
+        setIsLoading(true);
         const response = await fetch(`${url}`);
 
         const organisationsData = await response.json();
+        
         const organisationsMaxPages = calculateMaxPages({
           arr: organisationsData,
           pageSize: 10,
@@ -44,6 +45,7 @@ const OrganisationList = (props) => {
         setOrganisations(organisationsData);
         setMaxPages(organisationsMaxPages);
         setDisplayedOrganisations(currentDisplayedAgencies);
+        setIsLoading(false)
       } catch (error) {
         setError(error);
       }
@@ -56,7 +58,6 @@ const OrganisationList = (props) => {
       setOrganisations(agencies);
     if (orgType === "supplier" && suppliers.length !== 0)
       setOrganisations(suppliers);
-    setIsLoading(false);
     setError(null);
   }, [
     setIsLoading,
@@ -101,6 +102,7 @@ const OrganisationList = (props) => {
 
   const changePageSize = (event) => {
     setPageSize(+event.target.value);
+    setCurrentPage(1);
   };
 
   //handle organisation filter functions
@@ -130,7 +132,7 @@ const OrganisationList = (props) => {
     );
     return filteredArr;
   };
-
+  console.log(isLoading)
   return (
     <>
       {!isLoading && !error && (
